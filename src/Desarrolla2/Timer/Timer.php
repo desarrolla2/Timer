@@ -5,7 +5,7 @@
  * 
  * Description of Timer
  *
- * @author : Daniel González Cerviño <daniel.gonzalez@daniel.gonzalez@freelancemadrid.es>
+ * @author : Daniel González Cerviño <daniel.gonzalez@freelancemadrid.es>
  * @file : Timer.php , UTF-8
  * @date : Sep 5, 2012 , 5:13:20 PM
  */

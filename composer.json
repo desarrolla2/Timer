@@ -17,7 +17,7 @@
     "autoload": 
     {
         "psr-0": {
-            "Desarrolla2\\DB\\": "src/" 
+            "Desarrolla2\\Timer\\": "src/" 
         }
     },
     "minimum-stability": "dev"
