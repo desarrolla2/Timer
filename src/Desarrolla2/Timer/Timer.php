@@ -9,6 +9,9 @@
  * @file : Timer.php , UTF-8
  * @date : Sep 5, 2012 , 5:13:20 PM
  */
+
+namespace Desarrolla2\Timer;
+
 class Timer
 {
 
@@ -16,6 +19,10 @@ class Timer
     private $pause = 0;
     private $store = array();
 
+    /**
+     * 
+     * @param boolean $start
+     */
     public function __construct($start = true)
     {
         if ($start) {
@@ -23,12 +30,18 @@ class Timer
         }
     }
 
+    /**
+     * 
+     */
     public function reset()
     {
         $this->store = array();
         $this->time = microtime(true);
     }
 
+    /**
+     * 
+     */
     public function play()
     {
         if ($this->pause > 0) {
@@ -51,6 +64,11 @@ class Timer
         }
     }
 
+    /**
+     * 
+     * @param type $text
+     * @return type
+     */
     public function mark($text = '')
     {
         $text = $text ? $text : 'Timing info';
@@ -75,13 +93,20 @@ class Timer
         );
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function get()
     {
         $this->mark();
-
         return $this->store;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getMemoryUsage()
     {
         $size = memory_get_peak_usage(true);
