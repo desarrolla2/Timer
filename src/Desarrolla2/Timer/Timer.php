@@ -12,7 +12,9 @@
 
 namespace Desarrolla2\Timer;
 
-class Timer
+use Desarrolla2\Timer\TimerInterface;
+
+class Timer implements TimerInterface
 {
 
     private $time;
@@ -111,8 +113,15 @@ class Timer
     {
         $size = memory_get_peak_usage(true);
         $unit = array('b', 'kb', 'mb', 'gb', 'tb', 'pb');
-
         return sprintf('%.2f %s', $size / pow(1024, ($i = floor(log($size, 1024)))), $unit[$i]);
+    }
+
+    /**
+     * 
+     */
+    public function dump()
+    {
+        
     }
 
 }
