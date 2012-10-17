@@ -27,11 +27,6 @@ interface TimerInterface
 
     /**
      * 
-     */
-    public function play();
-
-    /**
-     * 
      * @param type $text
      * @return type
      */

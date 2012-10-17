@@ -18,7 +18,6 @@ class Timer implements TimerInterface
 {
 
     private $time;
-    private $pause = 0;
     private $store = array();
 
     /**
@@ -27,9 +26,8 @@ class Timer implements TimerInterface
      */
     public function __construct($start = true)
     {
-        if ($start) {
-            $this->play();
-        }
+        $this->time = microtime(true);
+        $this->mark('Created Timer');
     }
 
     /**
@@ -39,20 +37,6 @@ class Timer implements TimerInterface
     {
         $this->store = array();
         $this->time = microtime(true);
-    }
-
-    /**
-     * 
-     */
-    public function play()
-    {
-        if ($this->pause > 0) {
-            $this->time += (microtime(true) - $this->pause);
-            $this->pause = 0;
-        } elseif (!$this->store) {
-            $this->time = microtime(true);
-            $this->mark('Created');
-        }
     }
 
     /**
@@ -72,7 +56,7 @@ class Timer implements TimerInterface
             'text'          => $text,
             'total'         => $total,
             'from_previous' => $from_previous,
-            'memory'         => $this->getMemoryUsage()
+            'memory'        => $this->getMemoryUsage()
         );
     }
 
@@ -82,10 +66,9 @@ class Timer implements TimerInterface
      */
     public function get()
     {
-        $this->mark();
+        $this->mark('Get Timer');
         return $this->store;
     }
-
     /**
      * 
      * @return type
@@ -93,7 +76,7 @@ class Timer implements TimerInterface
     protected function getMemoryUsage()
     {
         $size = memory_get_peak_usage(true);
-        $unit = array('b', 'kb', 'mb', 'gb', 'tb', 'pb');
+        $unit = array('B', 'KB', 'MB', 'GB', 'TB', 'PB');
         return sprintf('%.2f %s', $size / pow(1024, ($i = floor(log($size, 1024)))), $unit[$i]);
     }
 
