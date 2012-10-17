@@ -1,7 +1,6 @@
-/composer.phar
-/composer.lock
-/vendor
 /nbproject
+/vendor
+composer.lock
 *~
 *.swp
 *.local.php

@@ -43,8 +43,4 @@ interface TimerInterface
      */
     public function get();
 
-    /**
-     * 
-     */
-    public function dump();
 }

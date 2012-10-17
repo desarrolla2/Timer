@@ -51,18 +51,7 @@ class Timer implements TimerInterface
             $this->pause = 0;
         } elseif (!$this->store) {
             $this->time = microtime(true);
-            $where = array();
-
-            foreach (debug_backtrace() as $row) {
-                $where[] = $row['file'] . ' (line ' . $row['line'] . ')';
-            }
-
-            $this->store[] = array(
-                'text' => 'Timing start',
-                'total' => 0,
-                'from_previous' => 0,
-                'where' => $where
-            );
+            $this->mark();
         }
     }
 
@@ -76,22 +65,14 @@ class Timer implements TimerInterface
         $text = $text ? $text : 'Timing info';
         $total = microtime(true) - $this->time;
 
-        $where = array();
-
-        foreach (debug_backtrace() as $row) {
-            $where[] = $row['file'] . ' (line ' . $row['line'] . ')';
-        }
-
         $from_previous = end($this->store);
         $from_previous = $total - $from_previous['total'];
 
-        $this->play();
-
         return $this->store[] = array(
-            'text' => $text,
-            'total' => $total,
+            'text'          => $text,
+            'total'         => $total,
             'from_previous' => $from_previous,
-            'where' => $where
+            'memory'         => $this->getMemoryUsage()
         );
     }
 
@@ -109,19 +90,11 @@ class Timer implements TimerInterface
      * 
      * @return type
      */
-    public function getMemoryUsage()
+    protected function getMemoryUsage()
     {
         $size = memory_get_peak_usage(true);
         $unit = array('b', 'kb', 'mb', 'gb', 'tb', 'pb');
         return sprintf('%.2f %s', $size / pow(1024, ($i = floor(log($size, 1024)))), $unit[$i]);
-    }
-
-    /**
-     * 
-     */
-    public function dump()
-    {
-        
     }
 
 }
