@@ -51,7 +51,7 @@ class Timer implements TimerInterface
             $this->pause = 0;
         } elseif (!$this->store) {
             $this->time = microtime(true);
-            $this->mark();
+            $this->mark('Created');
         }
     }
 
