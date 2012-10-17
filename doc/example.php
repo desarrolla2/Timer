@@ -13,17 +13,16 @@
  * @date : Oct 17, 2012 , 8:59:40 PM
 
  */
-
 require __DIR__ . '/../vendor/autoload.php';
 
-
 use Desarrolla2\Timer\Timer;
+
 $timer = new Timer();
 
-echo 'doing something ....';
+echo 'doing something ....' . PHP_EOL;
 sleep(1);
 $timer->mark('task 1');
-echo 'doing something ....';
+echo 'doing something ....' . PHP_EOL;
 sleep(1);
 $timer->mark('task 2');
 var_dump($timer);
