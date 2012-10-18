@@ -35,4 +35,3 @@ for ($i = 1; $i <= $iterations; $i++) {
 }
 $timer->mark('task 2');
 var_dump($timer->get());
-
