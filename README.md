@@ -37,7 +37,7 @@ $timer = new Timer();
 
 $timer->mark('Starting a mark previous to operations');
 
-foreach ($alotOfOperations as $operation) {
+foreach ($aLotOfOperations as $operation) {
     $timer->mark('Start operation '.$operation->name);
     
     $operation->doSomething();
