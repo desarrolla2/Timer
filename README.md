@@ -38,11 +38,11 @@ $timer = new Timer();
 $timer->mark('Starting a mark previous to operations');
 
 foreach ($alotOfOperations as $operation) {
-$timer->mark('Start operation '.$operation->name);
-
-$operation->doSomething();
-
-$timer->mark('End operation '.$operation->name);
+    $timer->mark('Start operation '.$operation->name);
+    
+    $operation->doSomething();
+    
+    $timer->mark('End operation '.$operation->name);
 }
 
 $timer->mark('Ended a mark previous to operations');
