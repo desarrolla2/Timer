@@ -3,8 +3,8 @@
 <phpunit bootstrap="./tests/bootstrap.php" colors="true">
 
     <testsuites>
-        <testsuite name="Desarrolla2 DB test suite">
-            <directory suffix="Test.php">./test</directory>
+        <testsuite name="Desarrolla2 Timer test suite">
+            <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
 
@@ -13,11 +13,14 @@
             <directory>./Test</directory>
         </whitelist>
         <blacklist>
+            <directory>/usr/share/pear/</directory>
             <directory>./vendor</directory>
-        </blacklist>  
+        </blacklist>
     </filter>
-    
+
     <logging>
-        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>      
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
+        <log type="coverage-html" target="build/coverage" title="Desarrolla2 Cache Client" charset="UTF-8" yui="true"
+             highlight="true" lowUpperBound="35" highLowerBound="70"/>
     </logging>
 </phpunit>

@@ -13,6 +13,9 @@
   "require": {
     "php": "~5.4"
   },
+  "require-dev": {
+    "raulfraile/ladybug": "~1.0.11"
+  },
   "autoload": {
     "psr-4": {
       "Desarrolla2\\Timer\\": "src/"

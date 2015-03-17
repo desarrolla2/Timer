@@ -13,31 +13,22 @@
 
 namespace Desarrolla2\Timer;
 
+use Desarrolla2\Timer\Formatter\FormatterInterface;
+
 /**
  * Interface TimerInterface
  */
 interface TimerInterface
 {
-
     /**
-     * @param bool $start
+     * @param FormatterInterface $formatter
      */
-    public function __construct($start = true);
-
-    /**
-     *
-     */
-    public function reset();
+    public function __construct(FormatterInterface $formatter = null);
 
     /**
      * @param string $text
      *
-     * @return mixed
+     * @return array
      */
     public function mark($text = '');
-
-    /**
-     * @return mixed
-     */
-    public function get();
 }

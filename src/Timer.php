@@ -13,6 +13,9 @@
 
 namespace Desarrolla2\Timer;
 
+use Desarrolla2\Timer\Formatter\FormatterInterface;
+use Desarrolla2\Timer\Formatter\Raw;
+
 /**
  * Timer
  */
@@ -24,23 +27,32 @@ class Timer implements TimerInterface
     protected $time;
 
     /**
-     * @var array
+     * @var int
      */
-    protected $marks = [];
-
-    public function __construct()
-    {
-        $this->start();
-        $this->mark('Created Timer');
-    }
+    protected $memory;
 
     /**
-     *
+     * @var FormatterInterface
      */
-    public function reset()
+    protected $formatter;
+
+    /**
+     * @var array
+     */
+    protected $marks;
+
+    /**
+     * @param FormatterInterface $formatter
+     */
+    public function __construct(FormatterInterface $formatter = null)
     {
-        $this->marks = [];
+        if (!$formatter) {
+            $formatter = new Raw();
+        }
+        $this->formatter = $formatter;
+
         $this->start();
+        $this->mark('Create Timer');
     }
 
     /**
@@ -50,43 +62,42 @@ class Timer implements TimerInterface
      */
     public function mark($text = '')
     {
-        $text = $text ? $text : 'Create mark';
-        $total = microtime(true) - $this->time;
-
-        $lastMark = end($this->marks);
-        $fromPreviousTime = $total - $lastMark['total'];
-
-        return $this->marks[] = [
-            'text' => $text,
-            'total' => $total,
-            'from_previous' => $fromPreviousTime,
-            'memory' => $this->getMemoryUsage(),
+        $this->marks[] = [
+            'text' => $text ? $text : 'Create mark',
+            'time' => [
+                'total' => $this->formatter->time($this->getTime()),
+                'from_previous' => 'not available',
+            ],
+            'memory' => [
+                'total' => $this->formatter->memory($this->getMemory()),
+                'from_previous' => 'not available',
+            ],
         ];
+
+        return end($this->marks);
     }
 
     protected function start()
     {
-        $this->time = microtime(true);
+        $this->marks = [];
+        $this->time = $this->getTime();
+        $this->memory = $this->getMemory();
+    }
+
+
+    /**
+     * @return int
+     */
+    protected function getMemory()
+    {
+        return memory_get_peak_usage(true);
     }
 
     /**
-     * @return array
+     * @return mixed
      */
-    public function get()
+    protected function getTime()
     {
-        $this->mark('Get Time');
-
-        return $this->marks;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getMemoryUsage()
-    {
-        $size = memory_get_peak_usage(true);
-        $unit = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
-
-        return sprintf('%.2f %s', $size / pow(1024, ($i = floor(log($size, 1024)))), $unit[$i]);
+        return microtime(true);
     }
 }
