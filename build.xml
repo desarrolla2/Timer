@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Timer" basedir=".">
+
+    <target name="prepare" description="Prepare for execution" >
+        <exec executable="composer">
+            <arg line="install --no-scripts --verbose --profile"/>
+        </exec>
+    </target>
+
+    <target name="cs" description="Analyzes some PHP source code and tries to fix coding standards issues ">
+        <parallel>
+            <exec executable="php-cs-fixer">
+                <arg line="fix src"/>
+            </exec>
+            <exec executable="php-formatter">
+                <arg line="formatter:header:fix src"/>
+            </exec>
+            <exec executable="php-formatter">
+                <arg line="formatter:use:sort src"/>
+            </exec>
+        </parallel>
+    </target>
+
+</project>
