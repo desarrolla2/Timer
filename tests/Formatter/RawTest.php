@@ -15,7 +15,7 @@ use Desarrolla2\Timer\Formatter\Raw;
 /**
  * RawTest
  */
-class RawTest extends \PHPUnit_Framework_TestCase
+class RawTest extends AbstractFormatterTest
 {
     /**
      * @var \FormatterInterface
@@ -30,7 +30,7 @@ class RawTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function dataProvider()
+    public function dataProviderForTime()
     {
         return [
             [1, 1],
@@ -40,30 +40,14 @@ class RawTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param int $expected
-     * @param int $time
-     *
-     * @dataProvider dataProvider
+     * @return array
      */
-    public function testTime($expected, $time)
+    public function dataProviderForMemory()
     {
-        $this->assertEquals(
-            $expected,
-            $this->formatter->time($time)
-        );
-    }
-
-    /**
-     * @param int $expected
-     * @param int $size
-     *
-     * @dataProvider dataProvider
-     */
-    public function testMemory($expected, $size)
-    {
-        $this->assertEquals(
-            $expected,
-            $this->formatter->memory($size)
-        );
+        return [
+            [1, 1],
+            [2, 2],
+            [3, 3],
+        ];
     }
 }
