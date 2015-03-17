@@ -62,19 +62,38 @@ class Timer implements TimerInterface
      */
     public function mark($text = '')
     {
-        $this->marks[] = [
+        $time = $this->getTime();
+        $memory = $this->getMemory();
+
+        $mark = [
             'text' => $text ? $text : 'Create mark',
             'time' => [
-                'total' => $this->formatter->time($this->getTime()),
-                'from_previous' => 'not available',
+                'total' => $this->formatter->time($time),
+                'raw' => $time,
             ],
             'memory' => [
-                'total' => $this->formatter->memory($this->getMemory()),
-                'from_previous' => 'not available',
+                'total' => $this->formatter->memory($memory),
+                'raw' => $memory
             ],
         ];
 
-        return end($this->marks);
+        $previous = end($this->marks);
+
+        if ($previous) {
+            $mark['time']['from_previous'] = $this->formatter->time($time - $previous['time']['raw']);
+            $mark['time']['from_start'] = $this->formatter->time($time - $this->time);
+            $mark['memory']['from_previous'] = $this->formatter->memory($memory - $previous['memory']['raw']);
+            $mark['memory']['from_start'] = $this->formatter->memory($memory - $this->memory);
+        } else {
+            $mark['time']['from_previous'] = false;
+            $mark['time']['from_start'] = false;
+            $mark['memory']['from_previous'] = false;
+            $mark['memory']['from_start'] = false;
+        }
+
+        $this->marks[] = $mark;
+
+        return $mark;
     }
 
     protected function start()
