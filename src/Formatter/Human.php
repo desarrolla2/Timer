@@ -19,9 +19,9 @@ namespace Desarrolla2\Timer\Formatter;
 class Human implements FormatterInterface
 {
     /**
-     * ': minute 60s
-     * s: second
-     * ms: milisecond 10−3s
+     * Formats:
+     * - s: second
+     * - ms: milisecond 10−3s
      *
      * @param int $time
      *
