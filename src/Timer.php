@@ -108,7 +108,6 @@ class Timer implements TimerInterface
         $this->memory = $this->getMemory();
     }
 
-
     /**
      * @return int
      */
