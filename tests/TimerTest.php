@@ -48,11 +48,12 @@ class TimerTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('memory', $mark);
 
         $time = $mark['time'];
-        $this->assertArrayHasKey('total', $time);
+        $this->assertArrayHasKey('from_start', $time);
         $this->assertArrayHasKey('from_previous', $time);
 
         $memory = $mark['memory'];
         $this->assertArrayHasKey('total', $memory);
+        $this->assertArrayHasKey('from_start', $memory);
         $this->assertArrayHasKey('from_previous', $memory);
     }
 }

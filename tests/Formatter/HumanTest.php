@@ -44,6 +44,7 @@ class HumanTest extends AbstractFormatterTest
     public function dataProviderForMemory()
     {
         return [
+            ['0', 0],
             ['1B', 1],
             ['20B', 20],
             ['300B', 300],

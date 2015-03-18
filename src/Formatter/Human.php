@@ -43,6 +43,9 @@ class Human implements FormatterInterface
      */
     public function memory($size)
     {
+        if ($size == 0) {
+            return '0';
+        }
         $scaleUnit = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
         $scale = floor(log($size, 1024));
         $size = round($size / pow(1024, ($scale)), 2);
