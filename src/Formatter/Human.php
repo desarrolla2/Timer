@@ -23,7 +23,7 @@ class Human implements FormatterInterface
      * - s: second
      * - ms: milisecond 10−3s
      *
-     * @param int $time
+     * @param float $time
      *
      * @return string
      */
@@ -33,7 +33,15 @@ class Human implements FormatterInterface
             return round($time * 1000, 2).'ms';
         }
 
-        return round($time, 2).'s';
+        if ($time < 120) {
+            return round($time, 2).'s';
+        }
+
+        $seconds = $time % 60;
+        $minutes = ($time - $seconds) / 60;
+
+        return sprintf('%dm%ss', $minutes, round($seconds, 2));
+
     }
 
     /**
