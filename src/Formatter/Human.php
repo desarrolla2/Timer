@@ -33,7 +33,7 @@ class Human implements FormatterInterface
             return round($time * 1000, 2).'ms';
         }
 
-        if ($time < 120) {
+        if ($time < 90) {
             return round($time, 2).'s';
         }
 
