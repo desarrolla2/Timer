@@ -37,10 +37,22 @@ class Human implements FormatterInterface
             return round($time, 2).'s';
         }
 
+        if ($time < 3600) {
+            $seconds = $time % 60;
+            $minutes = ($time - $seconds) / 60;
+
+            return sprintf('%dm%ss', $minutes, round($seconds, 2));
+        }
+
+        $seconds = $time % 3600;
+        $hours = ($time - $seconds) / 3600;
+
+        $time = $time - $hours * 3600;
         $seconds = $time % 60;
         $minutes = ($time - $seconds) / 60;
 
-        return sprintf('%dm%ss', $minutes, round($seconds, 2));
+        return sprintf('%dh %dm %ss', $hours, $minutes, round($seconds, 2));
+
 
     }
 

@@ -94,6 +94,18 @@ class Timer implements TimerInterface
     }
 
     /**
+     * @param string $text
+     *
+     * @return array
+     */
+    public function getNow($text = '')
+    {
+        $this->mark($text);
+
+        return end($this->marks);
+    }
+
+    /**
      * @return array
      */
     public function getAll()
