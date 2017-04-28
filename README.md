@@ -51,7 +51,7 @@ $timer->mark('Ended a mark previous to operations');
 
 ## Formatting
 
-//..
+// ..
 
 ## Contact
 
